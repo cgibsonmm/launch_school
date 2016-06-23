@@ -1,4 +1,3 @@
-require 'pry'
 require 'yaml'
 MESSAGES = YAML.load_file('loan_messages.yml')
 
