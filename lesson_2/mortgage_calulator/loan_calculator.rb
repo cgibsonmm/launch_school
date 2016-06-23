@@ -41,6 +41,7 @@ loop do
   apr = ''
   mpr = ''
   loan_duration = ''
+  loan_duration_months = ''
 
   # GETs loan ammount
   while correct_params != 'y'
@@ -74,6 +75,7 @@ loop do
       loan_duration = gets.chomp
       if number?(loan_duration)
         loan_duration = change_format(loan_duration)
+        loan_duration_months = loan_duration * 12
         break
       else
         prompt('not_vaild')
@@ -86,7 +88,7 @@ loop do
     Are these parameters correct?
     Your loan amount is: $#{loan_ammount}
     Your APR is: #{apr}%
-    Your loan duration is: #{loan_duration} months?
+    Your loan duration is: #{loan_duration_months} months?
     _______________________________________________
     --If these are correct type 'Y'--
     MSG
@@ -97,8 +99,8 @@ loop do
   end
 
   # computs payments and converts to $00.00 format
-  monthly_payments = loan_ammount * (mpr * (1 + mpr)**loan_duration) / \
-                     ((1 + mpr)**loan_duration - 1)
+  monthly_payments = loan_ammount * (mpr * (1 + mpr)**loan_duration_months) / \
+                     ((1 + mpr)**loan_duration_months - 1)
 
   monthly_payments = format("%.2f", monthly_payments)
 
@@ -106,7 +108,8 @@ loop do
   sleep(2)
   prompt('work_done')
   sleep(1)
-  puts "=> Your monthly payments come out to: $#{monthly_payments}"
+  puts "=> Your monthly payments come out to: $#{monthly_payments} per month
+  over the next #{loan_duration_months} months."
   sleep(2)
 
   prompt('run_again')
