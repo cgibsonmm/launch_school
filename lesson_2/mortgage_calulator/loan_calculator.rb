@@ -23,7 +23,7 @@ end
 prompt('greeting')
 
 # Prompt for name and make sure name is valid
-name = 'corey'
+name = ''
 loop do
   prompt('ask_name')
   name = gets.chomp
