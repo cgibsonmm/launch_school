@@ -20,7 +20,6 @@ def change_format(number)
   end
 end
 
-
 prompt('greeting')
 
 # Prompt for name and make sure name is valid
@@ -43,7 +42,6 @@ loop do
   mpr = ''
   loan_duration = ''
 
-
   # GETs loan ammount
   while correct_params != 'y'
     loop do
@@ -62,7 +60,7 @@ loop do
       prompt('apr')
       apr = gets.chomp
       if number?(apr)
-        apr = sprintf('%.2f', apr).to_f
+        apr = format('%.2f', apr).to_f
         mpr = apr / 12 / 100
         break
       else
@@ -82,9 +80,8 @@ loop do
       end
     end
 
-  # asks if all parameters are correct to compute
+    # asks if all parameters are correct to compute
     correct_params_prompt = <<-MSG
-
     _______________________________________________
     Are these parameters correct?
     Your loan amount is: $#{loan_ammount}
@@ -100,9 +97,10 @@ loop do
   end
 
   # computs payments and converts to $00.00 format
-  monthly_payments = loan_ammount * (mpr * (1 + mpr) ** loan_duration) / ((1 + mpr) ** loan_duration - 1)
+  monthly_payments = loan_ammount * (mpr * (1 + mpr)**loan_duration) / \
+                     ((1 + mpr)**loan_duration - 1)
 
-  monthly_payments = sprintf("%.2f", monthly_payments)
+  monthly_payments = format("%.2f", monthly_payments)
 
   prompt('work')
   sleep(2)
@@ -111,7 +109,6 @@ loop do
   puts "=> Your monthly payments come out to: $#{monthly_payments}"
   sleep(2)
 
-  final_answer = ''
   prompt('run_again')
   final_answer = gets.chomp
   break if final_answer.downcase.start_with?('n')
