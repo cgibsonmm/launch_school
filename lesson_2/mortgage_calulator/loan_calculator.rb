@@ -10,7 +10,7 @@ def number?(input)
   /\d/.match(input) && /\A\d*\.?\d*\z/.match(input)
 end
 
-# changes number fromat depenig on fixnum or float
+# changes number fromat depending on fixnum or float
 def change_format(number)
   if number =~ /\A\d*\.{1}\d*\z/
     number.to_f
@@ -35,7 +35,6 @@ end
 
 loop do
   # Defines vars
-  correct_params = 'n'
   loan_ammount = ''
   apr = ''
   mpr = ''
@@ -43,7 +42,7 @@ loop do
   loan_duration_months = ''
 
   # GETs loan ammount
-  while correct_params != 'y'
+  loop do
     loop do
       prompt('loan_ammount')
       loan_ammount = gets.chomp
@@ -93,8 +92,7 @@ loop do
     MSG
 
     puts correct_params_prompt
-    correct_params = gets.chomp
-    correct_params = correct_params.downcase
+    break if gets.chomp.start_with?('y', 'Y')
   end
 
   # computs payments and converts to $00.00 format
