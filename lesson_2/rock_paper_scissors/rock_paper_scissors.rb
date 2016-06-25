@@ -1,19 +1,13 @@
-VALID_CHOICES = %w("rock", "paper", "scissors")
+VALID_CHOICES = %w(rock paper scissors)
 
 def prompt(message)
   puts "=> #{message}"
 end
 
-def winning_condition?(player, computer)
-  player == 'rock' && computer == 'scissors' ||
-    player == 'paper' && computer == 'rock' ||
-    player == 'scissors' && computer == 'paper'
-end
-
-def lossing_conditions?(player, computer)
-  computer == 'rock' && player == 'scissors' ||
-    computer == 'paper' && player == 'rock' ||
-    computer == 'scissors' && player == 'paper'
+def winner?(first, second)
+  first == 'rock' && second == 'scissors' ||
+    first == 'paper' && second == 'rock' ||
+    first == 'scissors' && second == 'paper'
 end
 
 def display_winner
@@ -46,9 +40,9 @@ loop do
   computer_choice = VALID_CHOICES.sample
   prompt("You chose #{player_choice}, the computer chose #{computer_choice}")
 
-  if winning_condition?(player_choice, computer_choice)
+  if winner?(player_choice, computer_choice)
     display_winner
-  elsif lossing_conditions?(player_choice, computer_choice)
+  elsif winner?(computer_choice, player_choice)
     display_losser
   else
     display_tie
