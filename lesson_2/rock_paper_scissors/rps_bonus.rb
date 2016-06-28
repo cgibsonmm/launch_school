@@ -79,7 +79,9 @@ end
 # Replay loop
 loop do
   prompt('game_welcome')
+  sleep(1)
   prompt('champ')
+  sleep(1)
   # Main game loop
   loop do
     # Set user choice for single game, tests if valid entry
