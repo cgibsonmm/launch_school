@@ -105,13 +105,15 @@ loop do
         sleep(3)
       end
     end
-
+    # Sets computer choice
     computer_choice = VALID_CHOICES.sample
+
     prompt('rock_paper_scissors')
     sleep(3)
     puts "~~ The computer choose: #{computer_choice} ~~"
     sleep(2)
 
+    # Prompts winner and adds to game score
     if win?(user_choice, computer_choice)
       prompt('you_win')
       player_wins += 1
@@ -130,6 +132,7 @@ loop do
     games_played += 1
     display_final_winner(player_wins, computer_wins)
 
+    # Breaks put of loop if player  or computer win 5
     if player_wins == 5 || computer_wins == 5
       break
     end
