@@ -11,3 +11,12 @@ play_again: "Would you like to play again? Type Yes to play"
 print_history: Printing game history
 computer_5: "The computer has won five games. The computer claims champion! "
 user_five: "YOU HAVE WON FIVE GAMES! You're Champion"
+replay: 'You have chosen to play again.'
+end_game: "You have chosen to quit. BYE!"
+choose_again: "Please choose again"
+
+game_help:
+   "----------------------------------------------- \n This is Rock, Paper, Scissors, Lizard, Spock. \n First created by Sam Kass and Karen Bryla.\n -----------------------------------------------\n Instead of the tradional Rock, Paper, Scissors\n this game allows for less occurnces of a tie game.\n -----------------------------------------------\n    Scissors cuts Paper covers Rock crushes \n    Lizard posions Spock smashes Scissors \n    decapitates Lizard eats Paper disproves \n    Spock vaporizes Rock crushes Scissors. \n ----------------------------------------------- "
+
+exit_help:
+  "----------------------------------------------- \n At this time you can either exit the game or play again.\n Please choose either Yes to play again, or No to exit.\n ----------------------------------------------- \n"
