@@ -7,7 +7,7 @@ rock_paper_scissors: "Rock, Paper, Scissors says 'SHOOT!'"
 you_win: "YOU WIN!"
 computer_wins: "The computer wins this round"
 tie: "It's a tie!"
-play_again: "Would you like to play again? Type No to exit"
+play_again: "Would you like to play again? Type Yes to play"
 print_history: Printing game history
 computer_5: "The computer has won five games. The computer claims champion! "
 user_five: "YOU HAVE WON FIVE GAMES! You're Champion"
