@@ -92,6 +92,7 @@ loop do
     # Set user choice for single game, tests if valid entry
     puts ''
     display_choices
+    
     user_choice = ''
     loop do
       user_choice = gets.chomp.downcase
