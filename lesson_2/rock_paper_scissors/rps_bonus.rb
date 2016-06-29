@@ -89,9 +89,10 @@ loop do
 
   # Main game loop
   loop do
-    # Set user choice for single game, tests if valid entry
     puts ''
     display_choices
+
+    # Set user choice for single game, tests if valid entry
     user_choice = ''
     loop do
       user_choice = gets.chomp.downcase
