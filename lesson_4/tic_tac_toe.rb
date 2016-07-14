@@ -7,6 +7,8 @@ WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # Rows
 INITIAL_MARKER = " ".freeze
 PLAYER_MARKER = "X".freeze
 COMPUTER_MARKER = "O".freeze
+GAMES_TO_WIN = 5
+FIRST_PLAYER = "Choice".freeze
 
 def prompt(message)
   puts "--> #{message}"
@@ -43,10 +45,15 @@ def empty_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
+def joinor(arr, delimiter=', ', word='or')
+  arr[-1] = "#{word} #{arr.last}" if arr.size > 1
+  arr.size == 2 ? arr.join(' ') : arr.join(delimiter)
+end
+
 def player_place_piece!(brd)
   square = ''
   loop do
-    prompt "Pick a square #{empty_squares(brd).join(', ')}:"
+    prompt "Pick a square #{joinor(empty_squares(brd))}:"
     square = gets.chomp.to_i
     break if empty_squares(brd).include?(square)
     prompt "Sorry, invalid choice!"
@@ -54,8 +61,38 @@ def player_place_piece!(brd)
   brd[square] = PLAYER_MARKER
 end
 
+def detect_defence(line, brd, marker)
+  if brd.values_at(*line).count(marker) == 2
+    return brd.select { |k, v| line.include?(k) && v == INITIAL_MARKER }
+              .keys.first
+  end
+  nil
+end
+
 def computer_place_peice!(brd)
-  square = empty_squares(brd).sample
+  square = nil
+
+  # defense first
+  WINNING_LINES.each do |line|
+    square = detect_defence(line, brd, COMPUTER_MARKER)
+    break if square
+  end
+
+  if !square # attack
+    WINNING_LINES.each do |line|
+      square = detect_defence(line, brd, PLAYER_MARKER)
+      break if square
+    end
+  end
+
+  if brd[5] == INITIAL_MARKER
+    square = 5
+  end
+
+  if !square
+    square = empty_squares(brd).sample
+  end
+
   brd[square] = COMPUTER_MARKER
 end
 
@@ -78,6 +115,7 @@ def detect_winner(brd)
   nil
 end
 
+score = { "Player" => 0, "Computer" => 0 }
 loop do
   board = initialize_board
   display_board(board)
@@ -94,18 +132,26 @@ loop do
 
   if someone_won?(board)
     prompt "#{detect_winner(board)} won!"
+    score[detect_winner(board)] += 1
+    # rubocop:disable Metrics/LineLength
+    prompt "The score is Player: #{score['Player']}, Computer: #{score['Computer']} "
+    # rubocop:enable Metrics/LineLength
+    sleep(1)
   else
     prompt "It's a tie!"
   end
 
   answer = ''
-  loop do
-    prompt "Play again? (Y or N)"
-    answer = gets.chomp.downcase
+  if score.value?(GAMES_TO_WIN)
+    prompt "The #{score.key(GAMES_TO_WIN)} has won #{GAMES_TO_WIN} games!"
+    loop do
+      prompt "Play again? (Y or N)"
+      answer = gets.chomp.downcase
 
-    break if answer.start_with?('y', 'n')
-    prompt "Error not a valid answer"
+      break if answer.start_with?('y', 'n')
+      prompt "Error not a valid answer"
+    end
   end
-
-  break unless answer.start_with?('y')
+  puts score
+  break if answer.start_with?('n')
 end
