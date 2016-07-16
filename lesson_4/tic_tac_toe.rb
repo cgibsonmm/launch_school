@@ -69,21 +69,21 @@ def detect_defence(line, brd, marker)
   nil
 end
 
+def defence_offenese(player, brd)
+  WINNING_LINES.each do |line|
+    square = detect_defence(line, brd, player)
+    break if square
+  end
+end
+
 def computer_place_peice!(brd)
   square = nil
 
-  # defense first
-  WINNING_LINES.each do |line|
-    square = detect_defence(line, brd, COMPUTER_MARKER)
-    break if square
-  end
+  # offenes first
+  defence_offenese(COMPUTER_MARKER, brd)
+  binding.pry
 
-  if !square # attack
-    WINNING_LINES.each do |line|
-      square = detect_defence(line, brd, PLAYER_MARKER)
-      break if square
-    end
-  end
+  defence_offenese(PLAYER_MARKER, brd)
 
   if brd[5] == INITIAL_MARKER
     square = 5
