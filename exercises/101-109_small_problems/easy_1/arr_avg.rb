@@ -3,11 +3,8 @@
 # The array will never be empty and the numbers will always be
 # positive integers.
 
-# Examples:
-
 def average(arr)
-  sum = arr.inject(:+)
-  sum / arr.size
+  arr.reduce(:+) / arr.size
 end
 
 puts average([1, 5, 87, 45, 8, 8]) == 25
