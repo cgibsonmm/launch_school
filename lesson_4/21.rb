@@ -1,3 +1,5 @@
+require 'pry'
+
 CARD_FACE = %w(2 3 4 5 6 7 8 9 J Q K A).freeze
 CARD_SUITS = %w(Spades Clubs Diamonds Hearts).freeze
 GAME_SCORE = 21
