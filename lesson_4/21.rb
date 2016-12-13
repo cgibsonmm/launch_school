@@ -27,7 +27,7 @@ def hand_total(cards)
   hand.each do |card|
     sum += if card == "A"
              11
-           elsif card.to_i == 0
+           elsif card.to_i.zero?
              10
            else
              card.to_i
