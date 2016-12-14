@@ -54,8 +54,17 @@ def player_place_piece!(brd)
   brd[square] = PLAYER_MARKER
 end
 
+def detect_defense()
+  # if WINNING_LINES has two aply defense to that square
+
+end
+
 def computer_place_peice!(brd)
+
+  # computer chooses random square
   square = empty_squares(brd).sample
+  # computer choose square five if open
+  square = 5 if empty_squares(brd).include?(5)
   brd[square] = COMPUTER_MARKER
 end
 
